@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>SMART COLLEGE VISIT</title>
+
+    <!-- -------------- Fonts -------------- -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- -------------- Bootstrap -------------- -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.css" rel="stylesheet" />
+<!--    FONT -->
+    <link href='//fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="//code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="//code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- -------------- Mapsx  -------------- -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMjvLls40ZPLKSNbanBeezA8pc5WOK75w"></script>
+
+
+
+    <style>
+
+      .photo-text {
+        font-size: 20px;
+        font-weight: 600;
+        color: #3f3f3f;
+      }
+
+      #time-range p {
+        font-family: "Arial", sans-serif;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .ui-slider-horizontal {
+        height: 22px;
+        background: #AEDEFF;
+        clear: both;
+        margin: 8px 0;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 15px;
+        -o-border-radius: 15px;
+        border-radius: 15px;
+        border: none;
+      }
+
+      .ui-slider {
+        position: relative;
+        text-align: left;
+      }
+
+      .ui-slider-horizontal .ui-slider-range {
+        top: -1px;
+        height: 100%;
+      }
+
+      .ui-slider-horizontal .ui-slider-range {
+        position: absolute;
+        z-index: 1;
+        height: 22px;
+        font-size: .7em;
+        display: block;
+        border: 1px solid #5523f5;
+        -moz-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -khtml-border-radius: 15px;
+        border-radius: 15px;
+        background: #5523f5;
+
+        background-size: 100%;
+      }
+
+      .ui-slider-horizontal .ui-slider-handle {
+        border-radius: 50%;
+        background: #F9FBFA;
+        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgi…pZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+        background-size: 100%;
+        background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, #C7CED6), color-stop(100%, #F9FBFA));
+        background-image: -webkit-linear-gradient(top, #C7CED6, #F9FBFA);
+        background-image: -moz-linear-gradient(top, #C7CED6, #F9FBFA);
+        background-image: -o-linear-gradient(top, #C7CED6, #F9FBFA);
+        background-image: linear-gradient(top, #C7CED6, #F9FBFA);
+        width: 22px;
+        height: 22px;
+        -webkit-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+        -moz-box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+        box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.6), 0 -1px 0 1px rgba(0, 0, 0, 0.15) inset, 0 1px 0 1px rgba(255, 255, 255, 0.9) inset;
+        -webkit-transition: box-shadow .3s;
+        -moz-transition: box-shadow .3s;
+        -o-transition: box-shadow .3s;
+        transition: box-shadow .3s;
+      }
+
+      .ui-slider-horizontal .ui-slider-handle {
+        position: absolute;
+        z-index: 2;
+        width: 26px;
+        height: 26px;
+        cursor: default;
+        border: none;
+        cursor: pointer;
+      }
+
+      .ui-slider-horizontal .ui-slider-handle:after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        top: 50%;
+        margin-top: -5px;
+        left: 50%;
+        margin-left: -5px;
+        background: #5523f5;
+        -webkit-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
+        -moz-box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 white;
+        box-shadow: 0 1px 1px 1px rgba(22, 73, 163, 0.7) inset, 0 1px 0 0 #FFF;
+      }
+
+      .ui-slider-horizontal .ui-slider-handle {
+        top: -.3em;
+        margin-left: -.8em;
+      }
+
+      .ui-slider-horizontal .ui-slider-range {
+        background: #0D64CC !important;
+      }
+
+      .ui-slider a:focus {
+        outline: none;
+      }
+
+      #slider-range {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      #time-range {
+        width: 400px;
+      }
+
+      .slider-time, .slider-time2 {
+        color: #5523f5;
+        font-size: 16px;
+      }
+
+
+
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but smart doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!--jQuery-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--    Select2 dropdown-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
+
+      <!--    DATE Pickers-->
+    <script src="assets/js/jquery-ui-monthpicker.min.js"></script>
+    <script src="assets/js/jquery-ui-datepicker.min.js"></script>
+
+
+
+  </body>
+</html>
